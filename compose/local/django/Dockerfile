@@ -16,8 +16,10 @@ RUN apk update \
   && apk add postgresql-client
 
 # Requirements are installed here to ensure they will be cached.
-COPY ./requirements /requirements
-RUN pip install -r /requirements/local.txt
+RUN pip install poetry
+COPY poetry.lock pyproject.toml /
+RUN poetry config settings.virtualenvs.create false
+RUN poetry install --no-interaction --no-ansi
 
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r//' /entrypoint
