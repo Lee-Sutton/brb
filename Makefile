@@ -37,18 +37,6 @@ zip-data:
 extract-data:
 	tar -xf archive/data.tar.gz data/
 
-download-data:
-	az storage blob download --container-name "machine-learning" \
-                       --file "archive/data.tar.gz" \
-                       --name "data.tar.gz" \
-                       --connection-string "DefaultEndpointsProtocol=https;AccountName=keela;AccountKey=T3fe9GrK6Io5olM7LPCLtHEjfHLEpzf3lQYI9tibd2Y0Dm3zF8AqqawLKTAlOladr4KxCkj1xSsAUz37WAvapw==;EndpointSuffix=core.windows.net"
-
-upload-data: zip-data
-	az storage blob upload --container-name "machine-learning" \
-                       --file "archive/data.tar.gz" \
-                       --name "data.tar.gz" \
-                       --connection-string "DefaultEndpointsProtocol=https;AccountName=keela;AccountKey=T3fe9GrK6Io5olM7LPCLtHEjfHLEpzf3lQYI9tibd2Y0Dm3zF8AqqawLKTAlOladr4KxCkj1xSsAUz37WAvapw==;EndpointSuffix=core.windows.net"
-
 clean-build: ## remove build artifacts
 	rm -fr build/
 	rm -fr dist/
@@ -94,10 +82,10 @@ test:  ## test with local docker env
 startapp: ## start new django app $(app) - appname required
 	docker-compose -f local.yml run django python manage.py startapp $(app)
 
-build-local: ## build with local docker env
+build-local: clean  ## build with local docker env
 	docker-compose -f local.yml up --build
 
-build-production: ## build production env and run on localhost
+build-production: clean  ## build production env and run on localhost
 	docker-compose -f production.yml up --build
 
 prune-volumes: ## prune docker volumes
