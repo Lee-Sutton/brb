@@ -82,10 +82,10 @@ test:  ## test with local docker env
 startapp: ## start new django app $(app) - appname required
 	docker-compose -f local.yml run django python manage.py startapp $(app)
 
-build-local: clean  ## build with local docker env
+build-local:  ## build with local docker env
 	docker-compose -f local.yml up --build
 
-build-production: clean  ## build production env and run on localhost
+build-production:  ## build production env and run on localhost
 	docker-compose -f production.yml up --build
 
 prune-volumes: ## prune docker volumes
