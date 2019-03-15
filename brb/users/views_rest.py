@@ -11,13 +11,13 @@ TEST_USER = {
 }
 
 
-class SeedView(APIView):
+class IntegrationView(APIView):
     """
     View to seed and delete tests users
     """
 
     def post(self, request, format=None):
-        """Seeds in an admin user"""
+        """Seeds in an admin user in dev mode only"""
         # if is dev mode
         # seed in an admin user
         # User.objects.create_user(**TEST_USER)
