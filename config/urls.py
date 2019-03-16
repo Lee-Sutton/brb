@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
-from brb.users.views_rest import IntegrationView
+from brb.users.views_integration import IntegrationView
 
 urlpatterns = [
     path('ht/', include('health_check.urls')),

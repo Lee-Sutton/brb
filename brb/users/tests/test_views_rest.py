@@ -1,7 +1,7 @@
 import pytest
 from rest_framework import status
 from django.contrib.auth import get_user_model
-from brb.users.views_rest import TEST_USER
+from brb.users.views_integration import TEST_USER
 
 User = get_user_model()
 

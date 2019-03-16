@@ -25,3 +25,5 @@ class IntegrationView(APIView):
             return Response(status=status.HTTP_201_CREATED)
 
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+
