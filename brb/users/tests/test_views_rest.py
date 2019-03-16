@@ -1,6 +1,7 @@
 import pytest
 from rest_framework import status
 from django.contrib.auth import get_user_model
+from brb.users.views_rest import TEST_USER
 
 User = get_user_model()
 
@@ -11,18 +12,9 @@ def test_seed_user(client, settings):
     settings.DEBUG = True
     response = client.post('/integration/', format='json')
     assert response.status_code == status.HTTP_201_CREATED
-    users = User.objects.all()
-    assert users
-
-
-@pytest.mark.django_db
-@pytest.mark.xfail
-def test_user_is_admin(client):
-    """it should return a list of recipes in the database"""
-    response = client.post('/integration/', format='json')
-    assert response.status_code == status.HTTP_201_CREATED
-    users = User.objects.all()
-    assert False
+    user = User.objects.get(username=TEST_USER['username'])
+    assert user
+    assert user.is_superuser
 
 
 @pytest.mark.django_db

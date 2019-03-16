@@ -21,7 +21,7 @@ class IntegrationView(APIView):
     def post(self, request, format=None):
         """Seeds in an admin user in dev mode only"""
         if settings.DEBUG:
-            User.objects.create_user(**TEST_USER)
+            User.objects.create_superuser(**TEST_USER)
             return Response(status=status.HTTP_201_CREATED)
 
         return Response(status=status.HTTP_404_NOT_FOUND)
