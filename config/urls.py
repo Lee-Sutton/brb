@@ -7,6 +7,7 @@ from django.views import defaults as default_views
 from brb.users.views_rest import IntegrationView
 
 urlpatterns = [
+    path('ht/', include('health_check.urls')),
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
         "about/",

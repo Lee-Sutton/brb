@@ -59,6 +59,11 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'health_check',
+    'health_check.db',
+    'health_check.cache',
+    'health_check.storage',
+    'health_check.contrib.celery',
 ]
 LOCAL_APPS = [
     'brb.users.apps.UsersAppConfig',

@@ -271,6 +271,14 @@ six = ">=1.2"
 
 [[package]]
 category = "main"
+description = "Run checks on services like databases, queue servers, celery processes, etc."
+name = "django-health-check"
+optional = false
+python-versions = "*"
+version = "3.9.0"
+
+[[package]]
+category = "main"
 description = "Django model mixins and utilities"
 name = "django-model-utils"
 optional = false
@@ -988,7 +996,7 @@ python-versions = "*"
 version = "4.1.2"
 
 [metadata]
-content-hash = "c3eb652e37a1c160649312569118bce23b52cb3b9d67a5e33f8367adeef71429"
+content-hash = "8c0c39a6e1f121857086ecf35b09da6dbc9aa371dca9a24ce6897cbd80f8300c"
 python-versions = "^3.6"
 
 [metadata.hashes]
@@ -1019,6 +1027,7 @@ django-crispy-forms = ["5952bab971110d0b86c278132dae0aa095beee8f723e625c3d3fa288
 django-debug-toolbar = ["89d75b60c65db363fb24688d977e5fbf0e73386c67acf562d278402a10fc3736", "c2b0134119a624f4ac9398b44f8e28a01c7686ac350a12a74793f3dd57a9eea0"]
 django-environ = ["6c9d87660142608f63ec7d5ce5564c49b603ea8ff25da595fd6098f6dc82afde", "c57b3c11ec1f319d9474e3e5a79134f40174b17c7cc024bbb2fad84646b120c4"]
 django-extensions = ["6fcedb2ea660c9dbf9ac59441721ffdd4ab5b753fbd6159c3e28f391a65bab46", "a607459e5fa8c579a672131b63366fa52fab80adb2a862d362f5fb48cd2d2cac"]
+django-health-check = ["99df177d266faf2a64d775c6e4c098c16f5408586ecc259717d8cb601c8753ea"]
 django-model-utils = ["2c057f3bf0859aba27f04389f0cedd2d48f8c9b3848acb86fd9970794e58f477", "8cd377744aa45f9f131d652ec460c57d1aaa88d3e9b586c8e27eb709341b9084"]
 django-redis = ["af0b393864e91228dd30d8c85b5c44d670b5524cb161b7f9e41acc98b6e5ace7", "f46115577063d00a890867c6964ba096057f07cb756e78e0503b89cd18e4e083"]
 django-storages = ["8e35d2c7baeda5dc6f0b4f9a0fc142d25f9a1bf72b8cebfcbc5db4863abc552d", "b1a63cd5ea286ee5a9fb45de6c3c5c0ae132d58308d06f1ce9865cfcd5e470a7"]

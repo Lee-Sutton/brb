@@ -31,6 +31,7 @@ gunicorn = "=19.9.0"
 raven = "=6.10."
 django-storages = "^1.7"
 django-anymail = "^6.0"
+django-health-check = "^3.9"
 
 [tool.poetry.dev-dependencies]
 mypy = "=0.670"
