@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+make clean
+
 set -e
 echo "Running test scripts"
 eval $(docker-machine env -u)
