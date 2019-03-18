@@ -85,6 +85,9 @@ startapp: ## start new django app $(app) - appname required
 build-local:  ## build with local docker env
 	docker-compose -f local.yml up --build
 
+docker-shell:  ## access the docker conainer shell
+	docker-compose -f local.yml run django /bin/sh
+
 make-migrations:  # make migrations
 	docker-compose -f production.yml run django python manage.py makemigrations
 

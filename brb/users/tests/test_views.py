@@ -1,6 +1,8 @@
 import pytest
 from django.conf import settings
 from django.test import RequestFactory
+from rest_framework import status
+from rest_framework.test import APITestCase
 
 from brb.users.views import UserRedirectView, UserUpdateView
 
@@ -51,3 +53,32 @@ class TestUserRedirectView:
         view.request = request
 
         assert view.get_redirect_url() == f"/users/{user.username}/"
+
+
+class TestRestAuthViews(APITestCase):
+    """Auth end points"""
+
+    def setUp(self):
+        self.user = {
+            'username': 'lee',
+            'email': 'lee@e.com',
+            'password': 'secret'
+        }
+
+    # def test_login(self):
+    #     """It should allow the user to signup"""
+    #     create_user(**self.user)
+    #     response = self.client.post('/api/v1/rest-auth/login/', format='json',
+    #                                 data=self.user)
+    #     assert response.status_code == status.HTTP_200_OK
+
+    def test_signup(self):
+        new_user = {
+            'username': 'lee',
+            'email': 'lee@e.com',
+            'password1': '@secret123',
+            'password2': '@secret123'
+        }
+        response = self.client.post('/rest-auth/registration/',
+                                    format='json', data=new_user)
+        assert response.status_code == status.HTTP_201_CREATED
