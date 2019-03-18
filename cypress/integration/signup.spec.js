@@ -35,7 +35,8 @@ describe('signup spec', () => {
         cy.get('.alert').contains(`Confirmation e-mail sent to ${user.email}`)
 
         // The user wants to log out
-        cy.get('#navbarSupportedContent').contains('Log Out').click();
+        cy.get('#navbarSupportedContent').contains('Sign Out').click();
+        cy.get('[data-cy=sign-out-btn]').click();
 
         // The user should be able to sign in
         cy.get('#navbarSupportedContent').contains('Sign In').click();
