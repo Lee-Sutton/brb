@@ -79,8 +79,8 @@ docs: ## generate Sphinx HTML documentation, including API docs
 test:  ## test with local docker env
 	docker-compose -f local.yml run django pytest
 
-startapp: ## start new django app $(app) - appname required
-	docker-compose -f local.yml run django python manage.py startapp $(app)
+startapp: ## start new django app. Eg. make startapp app=dummy_app_name
+	docker-compose -f local.yml run django sh -c "cd brb/ && python ../manage.py startapp $(app)"
 
 build-local:  ## build with local docker env
 	docker-compose -f local.yml up --build
