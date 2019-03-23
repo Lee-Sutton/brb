@@ -9,7 +9,7 @@ const user = {
 describe('signup spec', () => {
     beforeEach(() => {
         cy.resetDb();
-        cy.visit('http://localhost:8000');
+        cy.visit('/');
     });
 
     it('should allow the user to signup', () => {
