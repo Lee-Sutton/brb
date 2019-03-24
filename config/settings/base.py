@@ -69,7 +69,7 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'brb.users.apps.UsersAppConfig',
-    # Your stuff: custom apps go here
+    'brb.terminal_logs',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
