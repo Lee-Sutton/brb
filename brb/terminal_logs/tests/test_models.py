@@ -6,8 +6,5 @@ from brb.terminal_logs.tests.factories import LogFactory
 
 @pytest.mark.django_db
 def test_logs_insert():
-    user = UserFactory()
-    log = LogFactory.build()
-    print(log)
-    Log.objects.create(content=log.content, user=user)
+    LogFactory.create()
     assert Log.objects.count()
