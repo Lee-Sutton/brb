@@ -8,5 +8,6 @@ from brb.terminal_logs.tests.factories import LogFactory
 def test_logs_insert():
     user = UserFactory()
     log = LogFactory.build()
-    Log.objects.create(log, user=user)
+    print(log)
+    Log.objects.create(content=log.content, user=user)
     assert Log.objects.count()
