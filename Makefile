@@ -45,7 +45,7 @@ clean-build: ## remove build artifacts
 	find . \( -path ./env -o -path ./venv -o -path ./.env -o -path ./.venv \) -prune -o -name '*.egg' -exec rm -f {} +
 
 clean-celery:  ## Clean up celery artifacts
-	rm celerybeat.pid celerybeat-schedule
+	-rm celerybeat.pid celerybeat-schedule
 
 clean-pyc: ## remove Python file artifacts
 	find . -name '*.pyc' -exec rm -f {} +
@@ -76,7 +76,7 @@ docs: ## generate Sphinx HTML documentation, including API docs
 	$(MAKE) -C docs html
 	$(BROWSER) docs/_build/html/index.html
 
-test:  ## test with local docker env
+test: clean ## test with local docker env
 	docker-compose -f local.yml run django pytest
 
 startapp: ## start new django app. Eg. make startapp app=dummy_app_name
@@ -84,6 +84,9 @@ startapp: ## start new django app. Eg. make startapp app=dummy_app_name
 
 build-local:  ## build with local docker env
 	docker-compose -f local.yml up --build
+
+docker-down:  ## stop deamon process running the local build
+	docker-compose -f local.yml down
 
 docker-shell:  ## access the docker conainer shell
 	docker-compose -f local.yml run django /bin/sh

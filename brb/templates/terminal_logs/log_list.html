@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% block title %}Logs{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h2>Logs</h2>
+    {% for log in logs %}
+      <p>log.content</p>
+    {% endfor %}
+
+  {% if not logs %}
+    <p>no logs currently saved</p>
+  {% endif %}
+    {#    <a href="{% url 'add_log'%}" class="btn btn-primary"></a>#}
+  </div>
+{% endblock content %}
+

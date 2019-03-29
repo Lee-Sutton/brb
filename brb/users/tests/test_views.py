@@ -65,11 +65,13 @@ class TestRestAuthViews(APITestCase):
             'password': 'secret'
         }
 
-    # def test_login(self):
+    # TODO refactor to pytest function
+    # def test_login(self, user):
     #     """It should allow the user to signup"""
-    #     create_user(**self.user)
     #     response = self.client.post('/api/v1/rest-auth/login/', format='json',
-    #                                 data=self.user)
+    #                                 data={'username': user.username,
+    #                                       'password': user.password,
+    #                                       'email': user.email})
     #     assert response.status_code == status.HTTP_200_OK
 
     def test_signup(self):

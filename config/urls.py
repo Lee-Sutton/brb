@@ -25,9 +25,15 @@ urlpatterns = [
     ),
     path("accounts/", include("allauth.urls")),
 
-    # Your stuff: custom urls includes go here
+    # rest authentication
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
+
+    # terminal logs
+    path(
+        'terminal_logs/',
+        include('brb.terminal_logs.urls', namespace="terminal_logs"),
+    ),
 ]
 
 urlpatterns += static(
