@@ -13,7 +13,7 @@ describe('user logs test suite', function () {
 
     it('should allow the user to create a new log', () => {
         cy.get('nav').contains('Logs').click();
-        cy.contains('Create a new log').should('be.visible');
-        cy.get('[data-cy=new-log-btn]').click();
+        cy.contains('Add Log').should('be.visible');
+        cy.get('[data-cy=create-log]').click();
     });
 });

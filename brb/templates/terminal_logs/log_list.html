@@ -5,14 +5,24 @@
 {% block content %}
   <div class="container">
     <h2>Logs</h2>
-    {% for log in logs %}
-      <p>log.content</p>
-    {% endfor %}
 
-  {% if not logs %}
-    <p>no logs currently saved</p>
-  {% endif %}
-    {#    <a href="{% url 'add_log'%}" class="btn btn-primary"></a>#}
+    <div class="row">
+      <div class="col-sm-12">
+        <a href="{% url 'terminal_logs:create' %}" class="btn btn-primary" data-cy="create-log">Add Log</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        {% for log in logs %}
+          <p>log.content</p>
+        {% endfor %}
+
+        {% if not logs %}
+          <p>no logs currently saved</p>
+        {% endif %}
+      </div>
+    </div>
   </div>
 {% endblock content %}
 

@@ -82,6 +82,9 @@ test: clean ## test with local docker env
 startapp: ## start new django app. Eg. make startapp app=dummy_app_name
 	docker-compose -f local.yml run django sh -c "cd brb/ && python ../manage.py startapp $(app)"
 
+up:  ## Docker compose up (skips building)
+	docker-compose -f local.yml up
+
 build-local:  ## build with local docker env
 	docker-compose -f local.yml up --build
 
