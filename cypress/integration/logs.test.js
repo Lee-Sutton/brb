@@ -15,5 +15,12 @@ describe('user logs test suite', function () {
         cy.get('nav').contains('Logs').click();
         cy.contains('Add Log').should('be.visible');
         cy.get('[data-cy=create-log]').click();
+
+        cy.get('form').within(() => {
+            cy.get('#id_content').type('dummy content');
+            cy.root().submit();
+        });
+
+        cy.get('[data-cy=log-table]').should('be.visible');
     });
 });

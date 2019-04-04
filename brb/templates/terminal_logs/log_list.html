@@ -11,18 +11,25 @@
         <a href="{% url 'terminal_logs:create' %}" class="btn btn-primary" data-cy="create-log">Add Log</a>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-sm-12">
-        {% for log in logs %}
-          <p>log.content</p>
-        {% endfor %}
-
-        {% if not logs %}
-          <p>no logs currently saved</p>
-        {% endif %}
-      </div>
-    </div>
+    <table class="table">
+      <thead class="thead-inverse">
+      <tr>
+        <th>Created</th>
+        <th>Content</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for log in log_list %}
+        <tr>
+          <td>
+            {{ log.content }}
+          </td>
+          <td class="align-middle">0</td>
+          <td></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
   </div>
 {% endblock content %}
 
