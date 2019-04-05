@@ -10,3 +10,6 @@ class Log(models.Model):
     """
     content = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __repr__(self):
+        return f'[Log model] {self.content}'

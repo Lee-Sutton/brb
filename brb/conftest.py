@@ -1,19 +1,14 @@
 import pytest
 from django.conf import settings
-from django.test import RequestFactory
+from django.test import RequestFactory, SimpleTestCase
 
 from brb.users.tests.factories import UserFactory
 
 
-class DjangoHelpers:
-    @staticmethod
-    def assert_content(response, content):
-        assert content in str(response.content)
-
 
 @pytest.fixture()
 def helpers():
-    return DjangoHelpers
+    return SimpleTestCase()
 
 
 @pytest.fixture(autouse=True)

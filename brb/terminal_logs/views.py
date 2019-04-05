@@ -14,8 +14,9 @@ class LogCreateView(LoginRequiredMixin, CreateView):
     model = Log
     fields = ["content"]
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
     def get_success_url(self):
         return reverse("terminal_logs:log_list")
-
-
-
