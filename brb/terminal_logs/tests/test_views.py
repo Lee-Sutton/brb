@@ -24,3 +24,13 @@ def test_create_view_csrf(client, helpers):
 
     helpers.assert_content(response, 'form')
     helpers.assert_content(response, 'csrfmiddlewaretoken')
+
+
+@log_in
+def test_create_view_valid_post(client: Client):
+    url = reverse('terminal_logs:create')
+    data = {
+        'content': 'Adding some dummy content'
+    }
+    response = client.post(url, data)
+    assert response.status_code == status.HTTP_201_CREATED
