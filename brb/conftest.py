@@ -5,6 +5,17 @@ from django.test import RequestFactory
 from brb.users.tests.factories import UserFactory
 
 
+class DjangoHelpers:
+    @staticmethod
+    def assert_content(response, content):
+        assert content in str(response.content)
+
+
+@pytest.fixture()
+def helpers():
+    return DjangoHelpers
+
+
 @pytest.fixture(autouse=True)
 def media_storage(settings, tmpdir):
     settings.MEDIA_ROOT = tmpdir.strpath
