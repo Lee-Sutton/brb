@@ -302,6 +302,19 @@ redis = ">=2.10.0"
 
 [[package]]
 category = "main"
+description = "Create a set of REST API endpoints for Authentication and Registration"
+name = "django-rest-auth"
+optional = false
+python-versions = "*"
+version = "0.9.3"
+
+[package.dependencies]
+Django = ">=1.8.0"
+djangorestframework = ">=3.1.3"
+six = ">=1.9.0"
+
+[[package]]
+category = "main"
 description = "Support for many storage backends in Django"
 name = "django-storages"
 optional = false
@@ -996,7 +1009,7 @@ python-versions = "*"
 version = "4.1.2"
 
 [metadata]
-content-hash = "8c0c39a6e1f121857086ecf35b09da6dbc9aa371dca9a24ce6897cbd80f8300c"
+content-hash = "ec89a37027e95d2e2781fe0f909a711930a5d7ff37afe553d5742be334648d5f"
 python-versions = "^3.6"
 
 [metadata.hashes]
@@ -1030,6 +1043,7 @@ django-extensions = ["6fcedb2ea660c9dbf9ac59441721ffdd4ab5b753fbd6159c3e28f391a6
 django-health-check = ["99df177d266faf2a64d775c6e4c098c16f5408586ecc259717d8cb601c8753ea"]
 django-model-utils = ["2c057f3bf0859aba27f04389f0cedd2d48f8c9b3848acb86fd9970794e58f477", "8cd377744aa45f9f131d652ec460c57d1aaa88d3e9b586c8e27eb709341b9084"]
 django-redis = ["af0b393864e91228dd30d8c85b5c44d670b5524cb161b7f9e41acc98b6e5ace7", "f46115577063d00a890867c6964ba096057f07cb756e78e0503b89cd18e4e083"]
+django-rest-auth = ["ad155a0ed1061b32e3e46c9b25686e397644fd6acfd35d5c03bc6b9d2fc6c82a"]
 django-storages = ["8e35d2c7baeda5dc6f0b4f9a0fc142d25f9a1bf72b8cebfcbc5db4863abc552d", "b1a63cd5ea286ee5a9fb45de6c3c5c0ae132d58308d06f1ce9865cfcd5e470a7"]
 djangorestframework = ["79c6efbb2514bc50cf25906d7c0a5cfead714c7af667ff4bd110312cd380ae66", "a4138613b67e3a223be6c97f53b13d759c5b90d2b433bad670b8ebf95402075f"]
 docopt = ["49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491"]

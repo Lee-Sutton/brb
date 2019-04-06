@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% block title %}Logs{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h2>Logs</h2>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <a href="{% url 'terminal_logs:create' %}" class="btn btn-primary" data-cy="create-log">Add Log</a>
+      </div>
+    </div>
+    <table class="table" data-cy="log-table">
+      <thead class="thead-inverse">
+      <tr>
+        <th>Content</th>
+        <th>Created</th>
+        <th>Updated</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for log in log_list %}
+        <tr>
+          <td>
+            <span class="d-inline-block text-truncate" style="max-width: 200px;">
+              {{ log.content }}
+            </span>
+            <div class="text-truncate">
+            </div>
+          </td>
+          <td class="align-middle">{{ log.created_at }}</td>
+          <td class="align-middle">{{ log.updated_at }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}
+

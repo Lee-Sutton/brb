@@ -26,3 +26,15 @@
 Cypress.Commands.add('resetDb', () => {
     return cy.exec('docker-compose -f local.yml run django python manage.py flush --noinput')
 });
+
+Cypress.Commands.add('registerUser', (user) => {
+    return cy.request('POST', '/rest-auth/registration/', user)
+});
+
+Cypress.Commands.add('seedUserAndLogin', (user) => {
+    const registerCredentials = Cypress._.pick(user, 'username', 'email');
+    registerCredentials.password1 = user.password;
+    registerCredentials.password2 = user.password;
+    cy.registerUser(registerCredentials);
+    cy.reload();
+});

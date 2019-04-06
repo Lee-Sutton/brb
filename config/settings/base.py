@@ -59,6 +59,9 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'rest_auth',
+    'rest_auth.registration',
+    'rest_framework.authtoken',
     'health_check',
     'health_check.db',
     'health_check.cache',
@@ -66,7 +69,7 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'brb.users.apps.UsersAppConfig',
-    # Your stuff: custom apps go here
+    'brb.terminal_logs',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

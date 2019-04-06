@@ -8,13 +8,14 @@ from brb.users.views_integration import IntegrationView
 
 urlpatterns = [
     path('ht/', include('health_check.urls')),
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path(
-        "about/",
-        TemplateView.as_view(template_name="pages/about.html"),
-        name="about",
-    ),
+    path("", TemplateView.as_view(template_name="pages/home.html"),
+         name="home"),
+    path("about/", TemplateView.as_view(template_name="pages/about.html"),
+         name="about",
+         ),
+
     path('integration/', IntegrationView.as_view()),
+
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
@@ -23,8 +24,19 @@ urlpatterns = [
         include("brb.users.urls", namespace="users"),
     ),
     path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
-] + static(
+
+    # rest authentication
+    path('rest-auth/', include('rest_auth.urls')),
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
+
+    # terminal logs
+    path(
+        'terminal_logs/',
+        include('brb.terminal_logs.urls', namespace="terminal_logs"),
+    ),
+]
+
+urlpatterns += static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
 
@@ -52,4 +64,5 @@ if settings.DEBUG:
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar
 
-        urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
+        urlpatterns = [path("__debug__/",
+                            include(debug_toolbar.urls))] + urlpatterns
