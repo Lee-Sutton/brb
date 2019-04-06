@@ -1,6 +1,5 @@
 import pytest
 from brb.terminal_logs.models import Log
-from brb.users.tests.factories import UserFactory
 from brb.terminal_logs.tests.factories import LogFactory
 
 

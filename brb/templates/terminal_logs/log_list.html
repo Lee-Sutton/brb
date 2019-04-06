@@ -14,18 +14,23 @@
     <table class="table">
       <thead class="thead-inverse">
       <tr>
-        <th>Created</th>
         <th>Content</th>
+        <th>Created</th>
+        <th>Updated</th>
       </tr>
       </thead>
       <tbody>
       {% for log in log_list %}
         <tr>
           <td>
-            {{ log.content }}
+            <span class="d-inline-block text-truncate" style="max-width: 200px;">
+              {{ log.content }}
+            </span>
+            <div class="text-truncate">
+            </div>
           </td>
-          <td class="align-middle">0</td>
-          <td></td>
+          <td class="align-middle">{{ log.created_at }}</td>
+          <td class="align-middle">{{ log.updated_at }}</td>
         </tr>
       {% endfor %}
       </tbody>

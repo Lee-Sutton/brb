@@ -10,6 +10,8 @@ class Log(models.Model):
     """
     content = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __repr__(self):
         return f'[Log model] {self.content}'
