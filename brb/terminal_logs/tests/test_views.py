@@ -40,3 +40,15 @@ def test_create_view_valid_post(client: Client, helpers: SimpleTestCase):
     response = client.post(url, data, follow=True)
     assert Log.objects.exists()
     helpers.assertRedirects(response, reverse('terminal_logs:log_list'))
+
+
+@log_in
+def test_create_view_invalid_post(client: Client):
+    """
+    A valid post should create a log and redirect the user to the log
+    detail page
+    """
+    url = reverse('terminal_logs:create')
+    response = client.post(url, data={}, follow=True)
+    assert not Log.objects.exists()
+    assert response.status_code == status.HTTP_200_OK
