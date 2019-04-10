@@ -1,6 +1,7 @@
 import pytest
 from django.conf import settings
 from django.test import RequestFactory, SimpleTestCase
+from rest_framework.test import APIClient
 
 from brb.users.tests.factories import UserFactory
 
@@ -30,6 +31,9 @@ def logged_in_user(client, django_user_model):
     assert logged_in
     return user
 
+@pytest.fixture()
+def api_client():
+    return APIClient()
 
 @pytest.fixture
 def request_factory() -> RequestFactory:
