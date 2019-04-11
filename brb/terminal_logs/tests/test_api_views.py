@@ -19,3 +19,18 @@ def test_create_log(api_client: APIClient, django_user_model):
     response = api_client.post(url, data=data)
     assert response.status_code == status.HTTP_201_CREATED
     assert Log.objects.filter(**data)
+
+
+@pytest.mark.django_db
+def test_invalid_log(api_client: APIClient, django_user_model):
+    """It should create a log"""
+    username = 'testuser'
+    password = 'testpass'
+
+    user = django_user_model.objects.create_user(username, password=password)
+    api_client.force_authenticate(user)
+
+    url = reverse('logs_api:crud')
+    response = api_client.post(url, data={})
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+    assert Log.objects.count() == 0

@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework import authentication, status
 from rest_framework.response import Response
-from brb.terminal_logs.models import Log
+from brb.terminal_logs.serializers import LogSerializer
 
 
 class LogsApi(APIView):
@@ -12,6 +12,9 @@ class LogsApi(APIView):
     authentication_classes = (authentication.TokenAuthentication,)
 
     def post(self, request):
-        log = Log(content=request.data['content'], user_id=request.user.id)
-        log.save()
-        return Response(status=status.HTTP_201_CREATED)
+        log = LogSerializer(data=request.data, context={'request': request})
+        if log.is_valid():
+            log.save()
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
