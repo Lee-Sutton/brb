@@ -34,6 +34,10 @@ urlpatterns = [
         'terminal_logs/',
         include('brb.terminal_logs.urls', namespace="terminal_logs"),
     ),
+    path(
+        'api/v1/',
+        include('brb.terminal_logs.api_urls', namespace="logs_api")
+    )
 ]
 
 urlpatterns += static(

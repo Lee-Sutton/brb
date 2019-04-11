@@ -1,6 +1,8 @@
 import pytest
+from django.urls import reverse
 from rest_framework.test import APIClient
 from rest_framework import status
+from brb.terminal_logs.models import Log
 
 
 @pytest.mark.django_db
@@ -9,11 +11,11 @@ def test_create_log(api_client: APIClient, django_user_model):
     username = 'testuser'
     password = 'testpass'
 
-    django_user_model.objects.create_user(username, password=password)
-    logged_in = api_client.login(username=username, password=password)
-    assert logged_in
+    user = django_user_model.objects.create_user(username, password=password)
+    api_client.force_authenticate(user)
 
     data = {'content': 'Testing this out'}
-
-    response = api_client.post('/api/v1/logs/', data=data)
+    url = reverse('logs_api:crud')
+    response = api_client.post(url, data=data)
     assert response.status_code == status.HTTP_201_CREATED
+    assert Log.objects.filter(**data)
