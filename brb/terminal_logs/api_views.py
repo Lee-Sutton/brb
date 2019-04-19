@@ -1,20 +1,15 @@
-from rest_framework.views import APIView
-from rest_framework import authentication, status
-from rest_framework.response import Response
+from rest_framework import generics
+from rest_framework import permissions
 from brb.terminal_logs.serializers import LogSerializer
+from brb.terminal_logs.models import Log
+from brb.terminal_logs.permissions import IsOwner
 
 
-class LogsApi(APIView):
+class LogsApi(generics.ListCreateAPIView):
     """
     Logs model API view
     * Requires token authentication
     """
-    authentication_classes = (authentication.TokenAuthentication,)
-
-    def post(self, request):
-        log = LogSerializer(data=request.data, context={'request': request})
-        if log.is_valid():
-            log.save()
-            return Response(status=status.HTTP_201_CREATED)
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwner,)
+    serializer_class = LogSerializer
+    queryset = Log.objects.all()
