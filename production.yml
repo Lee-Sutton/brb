@@ -7,10 +7,13 @@ volumes:
 
 services:
   django: &django
-    build:
-      context: .
-      dockerfile: ./compose/production/django/Dockerfile
-    image: brb_production_django
+    image: lmsutton/brb_swarm_django:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == worker]
     depends_on:
       - postgres
       - redis
@@ -18,23 +21,33 @@ services:
       - ./.envs/.production/.django
       - ./.envs/.production/.postgres
     command: /start
+    networks:
+      - app
 
   postgres:
-    build:
-      context: .
-      dockerfile: ./compose/production/postgres/Dockerfile
-    image: brb_production_postgres
+    image: lmsutton/brb_swarm_db:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == manager]
     volumes:
       - production_postgres_data:/var/lib/postgresql/data
       - production_postgres_data_backups:/backups
     env_file:
       - ./.envs/.production/.postgres
+    networks:
+    - app
 
   caddy:
-    build:
-      context: .
-      dockerfile: ./compose/production/caddy/Dockerfile
-    image: brb_production_caddy
+    image: lmsutton/brb_swarm_caddy:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == worker]
     depends_on:
       - django
     volumes:
@@ -44,23 +57,40 @@ services:
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
+    networks:
+      - app
 
   redis:
     image: redis:3.2
+    networks:
+      - app
 
   celeryworker:
     <<: *django
-    image: brb_production_celeryworker
     command: /start-celeryworker
 
   celerybeat:
     <<: *django
-    image: brb_production_celerybeat
     command: /start-celerybeat
 
   flower:
     <<: *django
-    image: brb_production_flower
     ports:
       - "5555:5555"
     command: /start-flower
+
+  visualizer:
+    image: dockersamples/visualizer:latest
+    ports:
+    - 8080:8080
+    volumes:
+    - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+    - app
+
+networks:
+  app:
+    driver: overlay

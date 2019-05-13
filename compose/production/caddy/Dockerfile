@@ -1,3 +1,5 @@
-FROM abiosoft/caddy:0.11.0
+FROM nginx:1.15.0-alpine
 
-COPY ./compose/production/caddy/Caddyfile /etc/Caddyfile
+RUN rm /etc/nginx/conf.d/default.conf
+COPY /prod.conf /etc/nginx/conf.d
+
