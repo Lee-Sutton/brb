@@ -7,6 +7,6 @@ docker push lmsutton/brb_swarm_django:latest
 docker build . -f ./compose/production/postgres/Dockerfile -t lmsutton/brb_swarm_db:latest
 docker push lmsutton/brb_swarm_db:latest
 
-# caddy
-docker build . -f ./compose/production/caddy/Dockerfile -t lmsutton/brb_swarm_caddy:latest
-docker push lmsutton/brb_swarm_caddy:latest
+# nginx
+docker build . -f ./compose/production/nginx/Dockerfile -t lmsutton/brb_swarm_nginx:latest
+docker push lmsutton/brb_swarm_nginx:latest

@@ -1,3 +1,3 @@
 eval $(docker-machine env node-1)
-docker stack ps -f "desired-state=running" django
-docker service logs django_django
+docker stack ps django
+docker service logs django_nginx

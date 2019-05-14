@@ -3,7 +3,7 @@ version: '3'
 volumes:
   production_postgres_data: {}
   production_postgres_data_backups: {}
-  production_caddy: {}
+  production_nginx: {}
 
 services:
   django: &django
@@ -40,8 +40,8 @@ services:
     networks:
     - app
 
-  caddy:
-    image: lmsutton/brb_swarm_caddy:latest
+  nginx:
+    image: lmsutton/brb_swarm_nginx:latest
     deploy:
       replicas: 1
       restart_policy:
@@ -51,14 +51,22 @@ services:
     depends_on:
       - django
     volumes:
-      - production_caddy:/root/.caddy
-    env_file:
-      - ./.envs/.production/.caddy
+      - production_nginx:/root/.nginx
+      - production_nginx:/etc/letsencrypt
+      - production_nginx:/var/www/certbot
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
     networks:
       - app
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+    - production_nginx:/etc/letsencrypt
+    - production_nginx:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
   redis:
     image: redis:3.2
