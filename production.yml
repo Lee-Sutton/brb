@@ -51,33 +51,6 @@ services:
     networks:
     - traefik-public
 
-#  proxy:
-#    command: --docker \ --docker.swarmmode \ --docker.watch \ --docker.exposedbydefault=false
-#      \ --constraints=tag==golfbuddy.biz \ --logLevel=INFO \ --accessLog \ --web
-#    deploy:
-#      labels:
-#        traefik.docker.network: traefik-public
-#        traefik.enable: "true"
-#        traefik.frontend.rule: Host:localhost
-#        traefik.port: '80'
-#        traefik.servicehttp.frontend.entryPoints: http
-#        traefik.servicehttp.frontend.redirect.entryPoint: https
-#        traefik.servicehttps.frontend.entryPoints: https
-#        traefik.tags: traefik-public
-#      placement:
-#        constraints:
-#        - node.role == manager
-#    image: traefik:v1.7
-#    networks:
-#      default: null
-#      traefik-public: null
-#    volumes:
-#    - /var/run/docker.sock:/var/run/docker.sock:rw
-#    ports:
-#    - "0.0.0.0:80:80"
-#    - "0.0.0.0:443:443"
-#    - "0.0.0.0:8081:8080"
-
   traefik:
     command: --api --docker \ --docker.swarmmode \ --docker.watch \ --docker.exposedbydefault=false
       \ --constraints=tag==golfbuddy.biz \ --logLevel=INFO \ --accessLog
