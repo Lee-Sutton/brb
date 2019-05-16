@@ -3,7 +3,7 @@ version: '3'
 volumes:
   production_postgres_data: {}
   production_postgres_data_backups: {}
-  production_nginx: {}
+  production_traefik: {}
 
 services:
   django: &django
@@ -21,6 +21,10 @@ services:
       - ./.envs/.production/.django
       - ./.envs/.production/.postgres
     command: /start
+    ports:
+      - "5000:5000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - app
 
@@ -40,33 +44,24 @@ services:
     networks:
     - app
 
-  nginx:
-    image: lmsutton/brb_swarm_nginx:latest
+  traefik:
+    image: lmsutton/brb_swarm_traefik:latest
     deploy:
       replicas: 1
       restart_policy:
         condition: on-failure
       placement:
-        constraints: [node.role == worker]
+        constraints: [node.role == manager]
+    command: --api --docker
     depends_on:
-      - django
+    - django
     volumes:
-      - production_nginx:/root/.nginx
-      - production_nginx:/etc/letsencrypt
-      - production_nginx:/var/www/certbot
+    - production_traefik:/etc/traefik/acme
+    - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - "0.0.0.0:80:80"
-      - "0.0.0.0:443:443"
-    networks:
-      - app
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-    - production_nginx:/etc/letsencrypt
-    - production_nginx:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    - "0.0.0.0:80:80"
+    - "0.0.0.0:443:443"
+    - "0.0.0.0:8081:8080"
 
   redis:
     image: redis:3.2
