@@ -30,18 +30,3 @@ OnHostRule = true
   # Use a HTTP-01 acme challenge rather than TLS-SNI-01 challenge
   [acme.httpChallenge]
   entryPoint = "http"
-
-[file]
-[backends]
-  [backends.django]
-    [backends.django.servers.server1]
-      url = "http://django:5000"
-
-[frontends]
-  [frontends.django]
-    backend = "django"
-    passHostHeader = true
-    [frontends.django.headers]
-      HostsProxyHeaders = ['X-CSRFToken']
-    [frontends.django.routes.dr1]
-      rule = "Host:ca.golfbuddy.biz"

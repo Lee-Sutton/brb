@@ -5,10 +5,19 @@ volumes:
   production_postgres_data_backups: {}
   production_traefik: {}
 
+networks:
+  traefik-public:
+    driver: overlay
+
 services:
   django: &django
     image: lmsutton/brb_swarm_django:latest
     deploy:
+      labels:
+        traefik.enable: "true"
+        traefik.frontend.rule: PathPrefix:/
+        traefik.port: '5000'
+        traefik.tags: golfbuddy.biz
       replicas: 1
       restart_policy:
         condition: on-failure
@@ -21,12 +30,10 @@ services:
       - ./.envs/.production/.django
       - ./.envs/.production/.postgres
     command: /start
-    ports:
-      - "5000:5000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      - app
+      - traefik-public
 
   postgres:
     image: lmsutton/brb_swarm_db:latest
@@ -42,17 +49,57 @@ services:
     env_file:
       - ./.envs/.production/.postgres
     networks:
-    - app
+    - traefik-public
+
+#  proxy:
+#    command: --docker \ --docker.swarmmode \ --docker.watch \ --docker.exposedbydefault=false
+#      \ --constraints=tag==golfbuddy.biz \ --logLevel=INFO \ --accessLog \ --web
+#    deploy:
+#      labels:
+#        traefik.docker.network: traefik-public
+#        traefik.enable: "true"
+#        traefik.frontend.rule: Host:localhost
+#        traefik.port: '80'
+#        traefik.servicehttp.frontend.entryPoints: http
+#        traefik.servicehttp.frontend.redirect.entryPoint: https
+#        traefik.servicehttps.frontend.entryPoints: https
+#        traefik.tags: traefik-public
+#      placement:
+#        constraints:
+#        - node.role == manager
+#    image: traefik:v1.7
+#    networks:
+#      default: null
+#      traefik-public: null
+#    volumes:
+#    - /var/run/docker.sock:/var/run/docker.sock:rw
+#    ports:
+#    - "0.0.0.0:80:80"
+#    - "0.0.0.0:443:443"
+#    - "0.0.0.0:8081:8080"
 
   traefik:
+    command: --api --docker \ --docker.swarmmode \ --docker.watch \ --docker.exposedbydefault=false
+      \ --constraints=tag==golfbuddy.biz \ --logLevel=INFO \ --accessLog
     image: lmsutton/brb_swarm_traefik:latest
+    networks:
+      default: null
+      traefik-public: null
     deploy:
+      labels:
+        traefik.docker.network: traefik-public
+        traefik.enable: "true"
+        traefik.frontend.rule: Host:localhost
+        traefik.port: '80'
+        traefik.servicehttp.frontend.entryPoints: http
+        traefik.servicehttp.frontend.redirect.entryPoint: https
+        traefik.servicehttps.frontend.entryPoints: https
+        traefik.tags: traefik-public
       replicas: 1
       restart_policy:
         condition: on-failure
       placement:
         constraints: [node.role == manager]
-    command: --api --docker
     depends_on:
     - django
     volumes:
@@ -66,21 +113,40 @@ services:
   redis:
     image: redis:3.2
     networks:
-      - app
+      - traefik-public
 
   celeryworker:
     <<: *django
     command: /start-celeryworker
+    deploy:
+      labels:
+        traefik.enable: "false"
 
   celerybeat:
     <<: *django
     command: /start-celerybeat
+    deploy:
+      labels:
+        traefik.enable: "false"
 
   flower:
     <<: *django
     ports:
       - "5555:5555"
     command: /start-flower
+    deploy:
+      labels:
+        traefik.docker.network: traefik-public
+        traefik.enable: "true"
+        traefik.frontend.rule: Host:flower.localhost
+        traefik.port: '5555'
+        traefik.redirectorservice.frontend.entryPoints: http
+        traefik.redirectorservice.frontend.redirect.entryPoint: https
+        traefik.tags: traefik-public
+        traefik.webservice.frontend.entryPoints: https
+    networks:
+      default: null
+      traefik-public: null
 
   visualizer:
     image: dockersamples/visualizer:latest
@@ -92,8 +158,5 @@ services:
       placement:
         constraints: [node.role == manager]
     networks:
-    - app
+    - traefik-public
 
-networks:
-  app:
-    driver: overlay
