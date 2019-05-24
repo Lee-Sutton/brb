@@ -2,14 +2,14 @@
     <div class="home">
         <b-jumbotron header="Golf Buddy" lead="Welcome to Golf Buddy" style="margin-top: 10%">
             <p>Create an account to get started</p>
-            <router-link to="/" class="btn btn-primary" data-cy="sign-up">Sign up</router-link>
+            <router-link :to="{path: 'accounts'}" class="btn btn-primary" data-cy="sign-up">Sign up</router-link>
         </b-jumbotron>
     </div>
 </template>
 
 <script lang="ts">
   import {Component, Vue} from 'vue-property-decorator';
-  import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+  import HelloWorld from '@/components/Accounts.vue'; // @ is an alias to /src
 
   @Component({
     components: {
