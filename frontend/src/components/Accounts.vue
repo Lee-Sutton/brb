@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-form @submit.prevent="onSubmit">
+        <b-form @submit.prevent="onSubmit" id="account-form">
             <b-form-group label="Email address:" label-for="id_email"
                           description="We'll never share your email with anyone else.">
                 <b-form-input id="id_email" v-model="form.email" type="email" required
