@@ -51,6 +51,7 @@
     "last 2 versions"
   ],
   "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/tests/unit/setupTests.ts",
     "moduleFileExtensions": [
       "js",
       "jsx",

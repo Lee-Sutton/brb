@@ -1,5 +1,5 @@
 import faker from 'faker';
-import {RouterLinkStub, shallowMount} from '@vue/test-utils';
+import {RouterLinkStub, mount} from '@vue/test-utils';
 import Accounts from '../../../src/components/Accounts.vue';
 import flushPromises from 'flush-promises';
 
@@ -14,7 +14,7 @@ const $store = {
 let wrapper: any;
 
 beforeEach(() => {
-    wrapper = shallowMount(Accounts, {
+    wrapper = mount(Accounts, {
         stubs: {
             RouterLink: RouterLinkStub,
         },
@@ -33,10 +33,10 @@ test('signup flow', async () => {
         password: faker.internet.password(),
     };
 
-    wrapper.find('[data-cy=username]').setValue(user.username);
-    wrapper.find('[data-cy=email]').setValue(user.email);
-    wrapper.find('[data-cy=password1]').setValue(user.password);
-    wrapper.find('[data-cy=password2]').setValue(user.password);
+    wrapper.find('#id_username').setValue(user.username);
+    wrapper.find('#id_email').setValue(user.email);
+    wrapper.find('#id_password').setValue(user.password);
+    wrapper.find('#id_password_confirm').setValue(user.password);
     wrapper.find('form').trigger('submit');
 
     expect($store.dispatch).toHaveBeenCalledWith('signup', {

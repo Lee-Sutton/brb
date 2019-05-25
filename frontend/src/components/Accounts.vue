@@ -41,7 +41,8 @@
         };
 
         async onSubmit() {
-            await this.$store.dispatch('signup', this.form)
+            await this.$store.dispatch('signup', this.form);
+            await this.$router.push('home');
         }
     }
 </script>
