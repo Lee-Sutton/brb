@@ -24,7 +24,7 @@ export interface AuthenticationResponse {
  * @param user - {username, email, password1, password2}
  */
 export const signup = (user: SignupUser): AxiosPromise<AuthenticationResponse> => {
-  return axios.post(`${HOST_URL}/api/v1/rest-auth/registration/`, user)
+  return axios.post(`${HOST_URL}/rest-auth/registration/`, user)
 };
 
 /**
@@ -32,5 +32,5 @@ export const signup = (user: SignupUser): AxiosPromise<AuthenticationResponse> =
  * @param user = {username, email, password}
  */
 export const login = (user: User): AxiosPromise<AuthenticationResponse> => {
-  return axios.post(`${HOST_URL}/api/v1/rest-auth/login/`, user);
+  return axios.post(`${HOST_URL}/rest-auth/login/`, user);
 };

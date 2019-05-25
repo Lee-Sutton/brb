@@ -14,12 +14,23 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
 ]
 
+# TODO fix for production
+CORS_ORIGIN_ALLOW_ALL = True
+
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {
-    'default': env.db('DATABASE_URL'),
-}
+if env.db('DATABASE_URL'):
+    DATABASES = {
+        'default': env.db('DATABASE_URL'),
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'db.sqlite3'
+        }
+    }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # Celery

@@ -13,11 +13,11 @@
             </b-form-group>
 
             <b-form-group label="Password" label-for="id_password">
-                <b-form-input id="id_password" v-model="form.password" type="password" required placeholder="Password"></b-form-input>
+                <b-form-input id="id_password" v-model="form.password1" type="password" required placeholder="Password"></b-form-input>
             </b-form-group>
 
             <b-form-group label="Confirm Password" label-for="id_password_confirm">
-                <b-form-input id="id_password_confirm" v-model="form.passwordConfirm" type="password" required
+                <b-form-input id="id_password_confirm" v-model="form.password2" type="password" required
                               placeholder="Confirm Password"
                 ></b-form-input>
             </b-form-group>
@@ -36,12 +36,12 @@
         form = {
             username: '',
             email: '',
-            password: '',
-            passwordConfirm: '',
+            password1: '',
+            password2: '',
         };
 
-        onSubmit(): void {
-           console.log(this.form)
+        async onSubmit() {
+            await this.$store.dispatch('signup', this.form)
         }
     }
 </script>

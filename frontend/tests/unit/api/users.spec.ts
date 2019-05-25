@@ -28,11 +28,11 @@ afterEach(() => {
 test('signup', async () => {
     const result = await signup(newUser);
     expect(result.data.key).toBeTruthy();
-    expect(axios.post).toHaveBeenCalledWith(`${HOST_URL}/api/v1/rest-auth/registration/`, newUser);
+    expect(axios.post).toHaveBeenCalledWith(`${HOST_URL}/rest-auth/registration/`, newUser);
 });
 
 test('login', async () => {
     const result = await login(user);
     expect(result.data.key).toBeTruthy();
-    expect(axios.post).toHaveBeenCalledWith(`${HOST_URL}/api/v1/rest-auth/login/`, user);
+    expect(axios.post).toHaveBeenCalledWith(`${HOST_URL}/rest-auth/login/`, user);
 });

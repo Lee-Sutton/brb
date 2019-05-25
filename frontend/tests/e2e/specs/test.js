@@ -1,6 +1,10 @@
 // https://docs.cypress.io/api/introduction/api.html
 
 describe('My First Test', () => {
+    beforeEach(() => {
+        cy.exec('docker-compose -f ../local.yml run django python manage.py flush --no-input')
+    });
+
     const user = {
         username: 'lmsutton',
         email: 'email@e.com',
