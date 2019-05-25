@@ -29,6 +29,6 @@ describe('My First Test', () => {
             cy.root().submit();
         });
 
-        cy.contains(`Welcome ${user.username}`);
+        cy.contains('Welcome user');
     })
 });
