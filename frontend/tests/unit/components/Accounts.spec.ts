@@ -48,7 +48,7 @@ test('signup flow', async () => {
     await flushPromises();
 
     // The user is directed back to the home page
-    expect($router.push).toHaveBeenCalledWith('/');
+    expect($router.push).toHaveBeenCalledWith('/i');
 });
 
 // test('should allow the user to cancel', function () {

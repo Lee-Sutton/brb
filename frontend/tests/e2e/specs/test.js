@@ -29,6 +29,16 @@ describe('My First Test', () => {
             cy.root().submit();
         });
 
+        // The user is logged in
         cy.contains('Welcome user');
+
+        // The user wants to create a score
+        cy.get('nav').contains('Scores').click();
+        cy.get('[data-cy=create-score]').click();
+        cy.get('#score-form').within(() => {
+            cy.get('#id_score').type(72);
+            cy.root().submit();
+        });
+        cy.get('[data-cy=scores-table]').contains(72);
     })
 });
