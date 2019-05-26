@@ -6,7 +6,7 @@
             </b-col>
 
             <b-col md="4" offset-md="4">
-                <button class="btn btn-primary float-right">Add Score</button>
+                <router-link :to="{name: 'add-score'}" class="btn btn-primary float-right">Add Score</router-link>
             </b-col>
         </b-row>
         <div class="row">

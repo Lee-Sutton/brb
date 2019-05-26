@@ -33,6 +33,11 @@ export default new Router({
             path: '/scores',
             name: 'scores',
             component: () => import('./components/Scores.vue'),
+        },
+        {
+            path: '/add-score',
+            name: 'add-score',
+            component: () => import('./components/AddScore.vue'),
         }
     ],
 });
