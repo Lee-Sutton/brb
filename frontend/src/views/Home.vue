@@ -4,7 +4,7 @@
             <p>Welcome user</p>
         </div>
         <div v-else>
-            <b-jumbotron header="Golf Buddy" lead="Welcome to Golf Buddy" style="margin-top: 10%">
+            <b-jumbotron header="Golf Buddy" lead="Welcome to Golf Buddy">
                 <p>Create an account to get started</p>
                 <router-link :to="{path: 'accounts'}" class="btn btn-primary" data-cy="sign-up">Sign up</router-link>
             </b-jumbotron>

@@ -3,7 +3,7 @@
         <div id="nav">
             <Navbar></Navbar>
         </div>
-        <div class="container">
+        <div class="container" style="margin-top: 5%">
             <router-view/>
         </div>
     </div>

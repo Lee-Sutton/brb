@@ -29,5 +29,10 @@ export default new Router({
             // which is lazy-loaded when the route is visited.
             component: () => import('./components/Accounts.vue'),
         },
+        {
+            path: '/scores',
+            name: 'scores',
+            component: () => import('./components/Scores.vue'),
+        }
     ],
 });
