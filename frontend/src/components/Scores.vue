@@ -10,22 +10,33 @@
             </b-col>
         </b-row>
         <div class="row">
-            <b-table striped hover :items="items"></b-table>
+            <b-table striped hover :items="allScoreCards" :fields="fields"></b-table>
         </div>
     </div>
 </template>
 
 <script>
+    import gql from 'graphql-tag';
+
     export default {
         data() {
             return {
-                items: [
-                    {age: 40, first_name: 'Dickerson', last_name: 'Macdonald'},
-                    {age: 21, first_name: 'Larsen', last_name: 'Shaw'},
-                    {age: 89, first_name: 'Geneva', last_name: 'Wilson'},
-                    {age: 38, first_name: 'Jami', last_name: 'Carney'}
-                ]
+                allScoreCards: [],
+                fields: [
+                    {
+                        key: 'score',
+                        sortable: true
+                    },
+                    {
+                        key: 'created',
+                        label: 'Shot at',
+                        sortable: true,
+                    }
+                ],
             }
+        },
+        apollo: {
+            allScoreCards: gql`query { allScoreCards { score } }`
         }
     }
 </script>
