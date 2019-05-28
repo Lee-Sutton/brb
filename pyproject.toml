@@ -34,6 +34,7 @@ django-anymail = "^6.0"
 django-health-check = "^3.9"
 django-rest-auth = "^0.9.3"
 django-cors-headers = "^3.0"
+graphene-django = "^2.2"
 
 [tool.poetry.dev-dependencies]
 mypy = "=0.670"

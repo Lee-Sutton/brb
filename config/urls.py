@@ -5,6 +5,10 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from brb.users.views_integration import IntegrationView
+from graphene_django.views import GraphQLView
+from brb.schema import schema
+from django.views.decorators.csrf import csrf_exempt
+
 
 urlpatterns = [
     path('ht/', include('health_check.urls')),
@@ -34,6 +38,9 @@ urlpatterns = [
         'terminal_logs/',
         include('brb.terminal_logs.urls', namespace="terminal_logs"),
     ),
+
+    # graphql endpoint
+    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema))),
 ]
 
 urlpatterns += static(

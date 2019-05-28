@@ -95,7 +95,10 @@ docker-shell:  ## access the docker conainer shell
 	docker-compose -f local.yml run django /bin/sh
 
 make-migrations:  # make migrations
-	docker-compose -f production.yml run django python manage.py makemigrations
+	docker-compose -f local.yml run django python manage.py makemigrations
+
+createsuperuser:  # create a superuser
+	docker-compose -f local.yml run django python manage.py createsuperuser
 
 migrate:  # django migrate
 	docker-compose -f local.yml run django python manage.py migrate

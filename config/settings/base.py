@@ -52,6 +52,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
     # 'django.contrib.humanize', # Handy template tags
     'django.contrib.admin',
+    'graphene_django'
 ]
 THIRD_PARTY_APPS = [
     'crispy_forms',
@@ -70,7 +71,9 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'brb.users.apps.UsersAppConfig',
+    # FIXME remove the terminal_logs app
     'brb.terminal_logs',
+    'brb.scores',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
