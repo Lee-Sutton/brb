@@ -15,41 +15,13 @@
     import {Component, Vue} from 'vue-property-decorator';
 
     @Component
-    export default class Accounts extends Vue {
+    export default class AddScore extends Vue {
         form = {
             score: null,
         };
 
         async onSubmit() {
-            this.$apollo.mutate({
-                mutation: gql
-            });
         }
-
-        addTag() {
-            // We save the user input in case of an error
-            // We clear it early to give the UI a snappy feel
-            this.newTag = '';
-            // Call to the graphql mutation
-            this.$apollo.mutate({
-                // Query
-                mutation: gql`mutation ($label: String!) { addTag(label: $label) { id label } }`,
-                // Parameters
-                variables: {
-                    label: newTag,
-                },
-            }).then((data) => {
-                // Result
-                console.log(data)
-            }).catch((error) => {
-                // Error
-                console.error(error)
-                // We restore the initial user input
-                this.newTag = newTag
-            })
-        }
-
-    ,
     }
 </script>
 
