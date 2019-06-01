@@ -4,6 +4,6 @@ from brb.scores.tests.factories import ScoreCardFactory
 
 
 @pytest.mark.django_db
-def test_logs_insert():
+def test_insert_scores():
     ScoreCardFactory.create()
     assert models.ScoreCard.objects.count()

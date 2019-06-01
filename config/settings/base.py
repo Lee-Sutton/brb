@@ -71,8 +71,6 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'brb.users.apps.UsersAppConfig',
-    # FIXME remove the terminal_logs app
-    'brb.terminal_logs',
     'brb.scores',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

@@ -1,15 +1,16 @@
-import factory
-from factory import DjangoModelFactory, Faker
+import random
+
+from factory import DjangoModelFactory
 from brb.scores.models import ScoreCard
-from brb.users.tests.factories import UserFactory
 
 
 class ScoreCardFactory(DjangoModelFactory):
-    score = Faker('integer')
-    slope = Faker('integer')
-    rating = Faker('integer')
+    score = random.randint(0, 200)
+    rating = random.randint(0, 200)
+    slope = random.randint(0, 200)
 
     class Meta:
         model = ScoreCard
 
-    user = factory.SubFactory(UserFactory)
+    # TODO add users to the score model
+    # user = factory.SubFactory(UserFactory)

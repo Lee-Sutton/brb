@@ -33,12 +33,6 @@ urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
 
-    # terminal logs
-    path(
-        'terminal_logs/',
-        include('brb.terminal_logs.urls', namespace="terminal_logs"),
-    ),
-
     # graphql endpoint
     path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema))),
 ]
