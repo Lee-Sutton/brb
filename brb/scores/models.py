@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class ScoreCard(models.Model):
     score = models.IntegerField()
     slope = models.IntegerField(null=True)

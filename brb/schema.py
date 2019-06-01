@@ -9,4 +9,8 @@ class Query(brb.scores.schema.Query, graphene.ObjectType):
     pass
 
 
-schema = graphene.Schema(query=Query)
+class Mutation(graphene.ObjectType):
+    create_score_card = brb.scores.schema.ScoreCardMutation.Field()
+
+
+schema = graphene.Schema(query=Query, mutation=Mutation)
