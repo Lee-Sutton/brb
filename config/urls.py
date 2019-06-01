@@ -9,7 +9,6 @@ from graphene_django.views import GraphQLView
 from brb.schema import schema
 from django.views.decorators.csrf import csrf_exempt
 
-
 urlpatterns = [
     path('ht/', include('health_check.urls')),
     path("", TemplateView.as_view(template_name="pages/home.html"),
@@ -32,6 +31,9 @@ urlpatterns = [
     # rest authentication
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
+
+    # api
+    path('api/v1/scores', include('brb.scores.urls')),
 
     # graphql endpoint
     path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema))),
