@@ -22,6 +22,7 @@
     export default {
         async mounted () {
             await Score.$fetch();
+            console.log(Score.all());
             this.allScoreCards = Score.all();
         },
         data() {

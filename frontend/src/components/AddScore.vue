@@ -13,6 +13,7 @@
 
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator';
+    import Score from '@/models/score'
 
     @Component
     export default class AddScore extends Vue {
@@ -21,6 +22,13 @@
         };
 
         async onSubmit() {
+            await Score.$create({
+                data: this.form,
+            });
+            // await Score.$fetch({
+            //     data: this.form,
+            // });
+            this.$router.push({name: 'scores'});
         }
     }
 </script>

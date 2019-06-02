@@ -15,13 +15,14 @@ export default class Score extends Model {
         }
     }
 
-    get scoreRelativeToPar () {
-        return this.score - this.rating;
-    }
-
     static async $fetch () {
-        const result = await axios.get(`${HOST_URL}/api/v1/${Score.entity}`);
-        console.log(result);
+        const result = await axios.get(`${HOST_URL}/api/v1/${this.entity}`);
         return this.insert(result);
+    }
+    static async $create ({data}) {
+        const doc = new Score(data);
+        // TODO if it fails, remove the document from the store and display the error
+        // TODO Optimistic ui
+        return await axios.post(`${HOST_URL}/api/v1/${this.entity}`, doc);
     }
 }
