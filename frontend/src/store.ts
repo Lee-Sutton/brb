@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {signup as userSignup, login as userLogin, SignupUser, User} from './api/users';
+import VuexORM from '@vuex-orm/core';
+import database from './database';
+
+Vue.use(Vuex);
 
 export interface State {
     isLoggedIn: boolean,
 }
-
-Vue.use(Vuex);
 
 export const state = {
     isLoggedIn: !!localStorage.getItem('token'),
@@ -52,6 +54,7 @@ export default new Vuex.Store({
     state,
     mutations,
     actions,
+    plugins: [VuexORM.install(database)]
 });
 
 

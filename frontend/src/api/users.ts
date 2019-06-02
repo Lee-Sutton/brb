@@ -1,5 +1,6 @@
 import axios, {AxiosPromise} from 'axios';
 
+// TODO move this to the api folder /index.js
 export const HOST_URL = 'http://localhost:8000';
 
 export interface SignupUser {

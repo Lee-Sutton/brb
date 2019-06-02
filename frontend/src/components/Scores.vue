@@ -16,15 +16,28 @@
 </template>
 
 <script>
-    import gql from 'graphql-tag';
+
+    import Score from '../models/score';
 
     export default {
+        async mounted () {
+            await Score.$fetch();
+            this.allScoreCards = Score.all();
+        },
         data() {
             return {
                 allScoreCards: [],
                 fields: [
                     {
                         key: 'score',
+                        sortable: true
+                    },
+                    {
+                        key: 'rating',
+                        sortable: true
+                    },
+                    {
+                        key: 'slope',
                         sortable: true
                     },
                     {
@@ -35,8 +48,5 @@
                 ],
             }
         },
-        apollo: {
-            allScoreCards: gql`query { allScoreCards { score } }`
-        }
     }
 </script>
