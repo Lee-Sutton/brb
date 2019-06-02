@@ -19,10 +19,16 @@ export default class Score extends Model {
         const result = await axios.get(`${HOST_URL}/api/v1/${this.entity}`);
         return this.insert(result);
     }
+
     static async $create ({data}) {
         const doc = new Score(data);
         // TODO if it fails, remove the document from the store and display the error
         // TODO Optimistic ui
+        return await axios.post(`${HOST_URL}/api/v1/${this.entity}`, doc);
+    }
+
+    static async $update({data}) {
+        const doc = new Score(data);
         return await axios.post(`${HOST_URL}/api/v1/${this.entity}`, doc);
     }
 }

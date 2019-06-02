@@ -10,7 +10,22 @@
             </b-col>
         </b-row>
         <div class="row">
-            <b-table striped hover :items="allScoreCards" :fields="fields"></b-table>
+            <b-table striped hover :items="allScoreCards" :fields="fields">
+                <template slot="actions" slot-scope="line">
+                    <b-button-toolbar>
+                        <b-button-group class="mx-1">
+                            <b-button size="sm" variant="primary" @click="handleEdit(line)">
+                                Edit
+                            </b-button>
+                        </b-button-group>
+                        <b-button-group>
+                            <b-button size="sm" variant="danger" @click="handleRemove(line)">
+                                Remove
+                            </b-button>
+                        </b-button-group>
+                    </b-button-toolbar>
+                </template>
+            </b-table>
         </div>
     </div>
 </template>
@@ -20,7 +35,7 @@
     import Score from '../models/score';
 
     export default {
-        async mounted () {
+        async mounted() {
             await Score.$fetch();
             console.log(Score.all());
             this.allScoreCards = Score.all();
@@ -45,9 +60,17 @@
                         key: 'created',
                         label: 'Shot at',
                         sortable: true,
+                    },
+                    {
+                        key: 'actions',
                     }
                 ],
             }
         },
+        methods: {
+            handleRemove(line) {
+                console.log(line);
+            }
+        }
     }
 </script>
