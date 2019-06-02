@@ -1,10 +1,15 @@
 import {shallowMount} from '@vue/test-utils';
 import Home from '@/views/Home.vue';
 
-describe('Accounts.vue', () => {
+describe('Home.vue', () => {
     it('renders props.msg when passed', () => {
         const wrapper = shallowMount(Home, {
-            stubs: ['router-link']
+            stubs: ['router-link'],
+            mocks: {
+                $store: {
+                    state: {isLoggedIn: false}
+                }
+            }
         });
         expect(wrapper.text()).toContain('Create an account to get started')
     });
