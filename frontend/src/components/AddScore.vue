@@ -18,18 +18,17 @@
     @Component
     export default class AddScore extends Vue {
         // TODO Replace with deep copy
-        doc = {
-            score: null,
-        };
+        @Prop({default: null})
+        id: number;
+
+        doc = this.id ? Score.find(this.id) : new Score();
 
         async onSubmit() {
-            const score = new Score(this.doc);
-            console.log(score);
 
-            if (!score.id) {
-                await Score.$create(score);
+            if (!this.doc.id) {
+                await Score.$create(this.doc);
             } else {
-                await Score.$update(score);
+                await Score.$update(this.doc);
             }
             this.$router.push({name: 'scores'});
         }

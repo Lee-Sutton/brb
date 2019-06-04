@@ -20,12 +20,12 @@ export default class Score extends Model {
         return this.insert(result);
     }
 
-    static async $create (record: Model) {
+    static async $create (record: Score) {
         // TODO Optimistic ui
         return await axios.post(`${HOST_URL}/api/v1/${this.entity}`, record.$toJson());
     }
 
-    static async $update(record: Model) {
-        return await axios.post(`${HOST_URL}/api/v1/${this.entity}`, record.$toJson());
+    static async $update(record: Score) {
+        return await axios.put(`${HOST_URL}/api/v1/${this.entity}/${record.id}/`, record.$toJson());
     }
 }

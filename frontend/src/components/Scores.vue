@@ -73,7 +73,8 @@
             },
 
             handleEdit(line) {
-                this.$router.push({name: 'add-score', params: {scoreCard: line.item}})
+                console.log(line.item);
+                this.$router.push({name: 'add-score', params: {id: line.item.id}})
             }
         }
     }
