@@ -37,6 +37,7 @@ export default new Router({
         {
             path: '/add-score',
             name: 'add-score',
+            props: true,
             component: () => import('./components/AddScore.vue'),
         }
     ],

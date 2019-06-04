@@ -7,7 +7,7 @@ export default class Score extends Model {
 
     static fields() {
         return {
-            id: this.number(0),
+            id: this.attr(null),
             score: this.number(0),
             slope: this.number(0),
             rating: this.number(0),
@@ -20,15 +20,12 @@ export default class Score extends Model {
         return this.insert(result);
     }
 
-    static async $create ({data}) {
-        const doc = new Score(data);
-        // TODO if it fails, remove the document from the store and display the error
+    static async $create (record: Model) {
         // TODO Optimistic ui
-        return await axios.post(`${HOST_URL}/api/v1/${this.entity}`, doc);
+        return await axios.post(`${HOST_URL}/api/v1/${this.entity}`, record.$toJson());
     }
 
-    static async $update({data}) {
-        const doc = new Score(data);
-        return await axios.post(`${HOST_URL}/api/v1/${this.entity}`, doc);
+    static async $update(record: Model) {
+        return await axios.post(`${HOST_URL}/api/v1/${this.entity}`, record.$toJson());
     }
 }

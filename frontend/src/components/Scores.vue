@@ -70,6 +70,10 @@
         methods: {
             handleRemove(line) {
                 console.log(line);
+            },
+
+            handleEdit(line) {
+                this.$router.push({name: 'add-score', params: {scoreCard: line.item}})
             }
         }
     }
