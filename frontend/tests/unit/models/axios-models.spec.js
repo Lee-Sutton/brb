@@ -55,7 +55,7 @@ test('update records', async () => {
   expect(result).toEqual(201);
 
   expect(axios.put).toHaveBeenCalledWith(
-    `${HOST_URL}/api/v1/scores/${record.id}`,
+    `${HOST_URL}/api/v1/scores/${record.id}/`,
     record.$toJson()
   );
 });
