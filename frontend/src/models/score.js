@@ -27,6 +27,6 @@ export default class Score extends Model {
   }
 
   static async $update(record) {
-    return await axios.put(`${HOST_URL}/api/v1/${this.entity}/${record.id}/`, record.$toJson());
+    return await axios.put(`${HOST_URL}/api/v1/${this.entity}/${record.id}`, record.$toJson());
   }
 }
