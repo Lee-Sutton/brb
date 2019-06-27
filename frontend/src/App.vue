@@ -5,7 +5,7 @@
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading">Golf Buddy</div>
       <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action bg-light">Scores</a>
+        <router-link to="scores" class="list-group-item list-group-item-action bg-light">Scores</router-link>
         <a href="#" class="list-group-item list-group-item-action bg-light">Drills</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Handicap</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Short Game</a>
