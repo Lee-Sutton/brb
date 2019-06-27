@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-navbar class="navbar navbar-expand-lg navbar-light bg-light" variant="info">
-      <h2>Scores</h2>
+      <h2>{{navbarRoute}}</h2>
 
       <b-collapse id="nav-collapse" is-nav>
         <!--FIXME replace this with a helper function-->
@@ -36,14 +36,9 @@
 <script>
   export default {
     name: 'navbar',
-    methods: {
-      toggleSidebar() {
-        // FIXME move the sidebar state to the store
-        if (this.wrapperClass !== 'toggled') {
-          this.wrapperClass = 'toggled';
-        } else {
-          this.wrapperClass = '';
-        }
+    computed: {
+      navbarRoute () {
+        return this.$route.meta.title;
       }
     }
   }

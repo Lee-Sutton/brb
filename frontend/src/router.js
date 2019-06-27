@@ -32,6 +32,9 @@ export default new Router({
     {
       path: '/scores',
       name: 'scores',
+      meta: {
+        title: 'Scores'
+      },
       component: () => import('./components/Scores.vue'),
     },
     {
