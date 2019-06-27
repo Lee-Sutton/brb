@@ -1,9 +1,9 @@
 <template>
   <div>
     <b-navbar class="navbar navbar-expand-lg navbar-light bg-light" variant="info">
-      <b-navbar-brand href="#">Golf Buddy</b-navbar-brand>
+      <button class="btn btn-primary" id="menu-toggle" @click="toggleSidebar">Toggle Menu</button>
 
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <!--<b-navbar-brand href="#">Golf Buddy</b-navbar-brand>-->
 
       <b-collapse id="nav-collapse" is-nav>
         <!--FIXME replace this with a helper function-->
@@ -33,6 +33,16 @@
 
 <script>
   export default {
-    name: 'navbar'
+    name: 'navbar',
+    methods: {
+      toggleSidebar() {
+        // FIXME move the sidebar state to the store
+        if (this.wrapperClass !== 'toggled') {
+          this.wrapperClass = 'toggled';
+        } else {
+          this.wrapperClass = '';
+        }
+      }
+    }
   }
 </script>
