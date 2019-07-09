@@ -15,7 +15,7 @@ defaultEntryPoints = ["http", "https"]
 
 [docker]
   endpoint = "unix:///var/run/docker.sock"
-  domain = "ca.golfbuddy.biz"
+  domain = "ca.h dolfbuddy.biz"
   watch = true
   exposedByDefault = false
 

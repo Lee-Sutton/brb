@@ -9,7 +9,7 @@ const mockRoute = {
   }
 };
 
-test('It should render', () => {
+test('it should render', () => {
   const wrapper = mount(App, {
     stubs: ['router-link', 'router-view'],
     mocks: {
@@ -20,5 +20,6 @@ test('It should render', () => {
     }
   });
   expect(wrapper.html()).toBeTruthy();
+  expect(wrapper.html()).toMatchSnapshot();
 });
 
