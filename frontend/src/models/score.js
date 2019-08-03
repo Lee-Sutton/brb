@@ -9,9 +9,9 @@ export default class Score extends AxiosModel {
   static fields() {
     return {
       id: this.attr(null),
-      score: this.number(0),
-      slope: this.number(0),
-      rating: this.number(0),
+      score: this.number(null),
+      slope: this.number(null),
+      rating: this.number(null),
       // TODO add this
       // assignee: this.belongsTo(User, 'userId')
     }

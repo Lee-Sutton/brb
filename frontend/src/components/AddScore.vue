@@ -2,9 +2,21 @@
   <div>
     <b-form @submit.prevent="onSubmit" id="account-form">
       <b-form-group label="Score" label-for="id_score">
+
         <b-form-input id="id_score" v-model="doc.score" type="number" required
                       placeholder="Enter your final score"></b-form-input>
       </b-form-group>
+
+      <b-form-group label="Slope" label-for="id_score">
+        <b-form-input id="id_score" v-model="doc.slope" type="number" required
+                      placeholder="Course slope"></b-form-input>
+      </b-form-group>
+
+      <b-form-group label="Rating" label-for="id_score">
+        <b-form-input id="id_score" v-model="doc.rating" type="number" required
+                      placeholder="Course rating"></b-form-input>
+      </b-form-group>
+
       <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
   </div>
@@ -15,15 +27,9 @@
   import Score from '../models/score';
 
   export default {
-    props: {
-      id: {
-        default: () => null
-      }
-    },
-
     data() {
       return {
-        doc: this.id ? Score.find(this.id) : new Score()
+        doc: this.$router.id ? Score.find(this.id) : new Score()
       };
     },
 
