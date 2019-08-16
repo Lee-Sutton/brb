@@ -1,13 +1,11 @@
 from brb.scores.models import ScoreCard
-from brb.scores.serializers import ScoreCardSerializer
-from rest_framework import generics
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
 
-class ScoreCardList(generics.ListCreateAPIView):
-    queryset = ScoreCard.objects.all()
-    serializer_class = ScoreCardSerializer
+class ScoreCardList(ListView):
+    model = ScoreCard
 
 
-class ScoreCardDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = ScoreCard.objects.all()
-    serializer_class = ScoreCardSerializer
+class ScoreCardDetail(DetailView):
+    model = ScoreCard

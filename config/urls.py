@@ -6,7 +6,6 @@ from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from brb.users.views_integration import IntegrationView
 from graphene_django.views import GraphQLView
-from brb.schema import schema
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
@@ -34,9 +33,6 @@ urlpatterns = [
 
     # api
     path('api/v1/scores', include('brb.scores.urls')),
-
-    # graphql endpoint
-    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema))),
 ]
 
 urlpatterns += static(
